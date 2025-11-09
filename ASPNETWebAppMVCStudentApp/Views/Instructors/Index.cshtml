@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ASPNETWebAppMVCStudentApp.Models.Instructor>
+@using System.Linq
+
+@{
+    ViewBag.Title = "Instructors";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Hire Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @if (!Model.Any())
+    {
+        <tr>
+            <td colspan="4">No instructors found.</td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.HireDate.ToShortDateString()</td>
+                <td class="text-right">
+                    @Html.ActionLink("Details", "Details", new { id = item.InstructorID }, new { @class = "btn btn-outline-secondary btn-sm" })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.InstructorID }, new { @class = "btn btn-outline-primary btn-sm mx-1" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.InstructorID }, new { @class = "btn btn-outline-danger btn-sm" })
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

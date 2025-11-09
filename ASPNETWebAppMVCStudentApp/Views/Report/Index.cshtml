@@ -1,0 +1,31 @@
+﻿@model ASPNETWebAppMVCStudentApp.Models.CourseReportViewModel
+
+@{
+    ViewBag.Title = "Student Report";
+}
+
+<h2>@ViewBag.Title</h2>
+<p class="text-muted">Select a course to generate a student list. Choose Preview to open the PDF in the browser or Export to download it.</p>
+
+@using (Html.BeginForm("Index", "Report", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row g-3 align-items-end">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.SelectedCourseId, new { @class = "form-label" })
+                @Html.DropDownListFor(m => m.SelectedCourseId, Model.Courses, "-- Select Course --", new { @class = "form-select" })
+                @Html.ValidationMessageFor(m => m.SelectedCourseId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-6 text-md-end">
+            <button type="submit" name="actionType" value="Preview" class="btn btn-outline-primary me-2">
+                Preview
+            </button>
+            <button type="submit" name="actionType" value="Export" class="btn btn-primary">
+                Export PDF
+            </button>
+        </div>
+    </div>
+}

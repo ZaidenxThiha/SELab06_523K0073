@@ -1,0 +1,41 @@
+﻿@model ASPNETWebAppMVCStudentApp.Models.Department
+@using System.Linq
+
+@{
+    ViewBag.Title = "Department Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">@Model.Name</dd>
+            <dt class="col-sm-3">Budget</dt>
+            <dd class="col-sm-9">@String.Format("{0:C}", Model.Budget)</dd>
+            <dt class="col-sm-3">Start Date</dt>
+            <dd class="col-sm-9">@Model.StartDate.ToShortDateString()</dd>
+        </dl>
+    </div>
+</div>
+
+<h4>Courses</h4>
+<ul class="list-group mb-3">
+    @if (Model.Courses == null || !Model.Courses.Any())
+    {
+        <li class="list-group-item">No courses assigned.</li>
+    }
+    else
+    {
+        foreach (var course in Model.Courses)
+        {
+            <li class="list-group-item">@course.Title</li>
+        }
+    }
+</ul>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DepartmentID }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+</p>

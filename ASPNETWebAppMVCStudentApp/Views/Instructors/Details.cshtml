@@ -1,0 +1,25 @@
+﻿@model ASPNETWebAppMVCStudentApp.Models.Instructor
+
+@{
+    ViewBag.Title = "Instructor Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">First Name</dt>
+            <dd class="col-sm-9">@Model.FirstName</dd>
+            <dt class="col-sm-3">Last Name</dt>
+            <dd class="col-sm-9">@Model.LastName</dd>
+            <dt class="col-sm-3">Hire Date</dt>
+            <dd class="col-sm-9">@Model.HireDate.ToShortDateString()</dd>
+        </dl>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.InstructorID }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+</p>

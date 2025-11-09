@@ -1,0 +1,27 @@
+﻿@model ASPNETWebAppMVCStudentApp.Models.Course
+
+@{
+    ViewBag.Title = "Delete Course";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="alert alert-warning">
+    <p>Are you sure you want to delete this course?</p>
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Title</dt>
+    <dd class="col-sm-9">@Model.Title</dd>
+    <dt class="col-sm-3">Department</dt>
+    <dd class="col-sm-9">@Model.Department?.Name</dd>
+</dl>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.CourseID)
+
+    <button type="submit" class="btn btn-danger">Delete</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-secondary" })
+}

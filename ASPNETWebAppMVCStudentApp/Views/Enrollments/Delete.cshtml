@@ -1,0 +1,29 @@
+﻿@model ASPNETWebAppMVCStudentApp.Models.Enrollment
+
+@{
+    ViewBag.Title = "Delete Enrollment";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="alert alert-warning">
+    <p>Are you sure you want to delete this enrollment?</p>
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Student</dt>
+    <dd class="col-sm-9">@Model.Student?.FullName</dd>
+    <dt class="col-sm-3">Course</dt>
+    <dd class="col-sm-9">@Model.Course?.Title</dd>
+    <dt class="col-sm-3">Grade</dt>
+    <dd class="col-sm-9">@Model.Grade</dd>
+</dl>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.EnrollmentID)
+
+    <button type="submit" class="btn btn-danger">Delete</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-secondary" })
+}

@@ -1,0 +1,25 @@
+﻿@model ASPNETWebAppMVCStudentApp.Models.Enrollment
+
+@{
+    ViewBag.Title = "Enrollment Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Student</dt>
+            <dd class="col-sm-9">@Model.Student?.FullName</dd>
+            <dt class="col-sm-3">Course</dt>
+            <dd class="col-sm-9">@Model.Course?.Title</dd>
+            <dt class="col-sm-3">Grade</dt>
+            <dd class="col-sm-9">@Model.Grade</dd>
+        </dl>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EnrollmentID }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+</p>

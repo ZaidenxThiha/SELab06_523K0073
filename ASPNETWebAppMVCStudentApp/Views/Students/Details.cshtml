@@ -1,0 +1,56 @@
+﻿@model ASPNETWebAppMVCStudentApp.Models.Student
+@using System.Linq
+
+@{
+    ViewBag.Title = "Student Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">First Name</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.FirstName)</dd>
+
+            <dt class="col-sm-3">Last Name</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.LastName)</dd>
+
+            <dt class="col-sm-3">Enrollment Date</dt>
+            <dd class="col-sm-9">@Model.EnrollmentDate.ToShortDateString()</dd>
+        </dl>
+    </div>
+</div>
+
+<h4>Enrollments</h4>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Course</th>
+            <th>Grade</th>
+        </tr>
+    </thead>
+    <tbody>
+    @if (Model.Enrollments == null || !Model.Enrollments.Any())
+    {
+        <tr>
+            <td colspan="2">This student is not enrolled in any courses.</td>
+        </tr>
+    }
+    else
+    {
+        foreach (var enrollment in Model.Enrollments)
+        {
+            <tr>
+                <td>@enrollment.Course?.Title</td>
+                <td>@enrollment.Grade</td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.StudentID }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+</p>

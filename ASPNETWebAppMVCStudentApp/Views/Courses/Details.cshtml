@@ -1,0 +1,54 @@
+﻿@model ASPNETWebAppMVCStudentApp.Models.Course
+@using System.Linq
+
+@{
+    ViewBag.Title = "Course Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Title</dt>
+            <dd class="col-sm-9">@Model.Title</dd>
+            <dt class="col-sm-3">Credits</dt>
+            <dd class="col-sm-9">@Model.Credits</dd>
+            <dt class="col-sm-3">Department</dt>
+            <dd class="col-sm-9">@Model.Department?.Name</dd>
+        </dl>
+    </div>
+</div>
+
+<h4>Enrollments</h4>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Grade</th>
+        </tr>
+    </thead>
+    <tbody>
+    @if (Model.Enrollments == null || !Model.Enrollments.Any())
+    {
+        <tr>
+            <td colspan="2">No students enrolled.</td>
+        </tr>
+    }
+    else
+    {
+        foreach (var enrollment in Model.Enrollments)
+        {
+            <tr>
+                <td>@enrollment.Student?.FullName</td>
+                <td>@enrollment.Grade</td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CourseID }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+</p>

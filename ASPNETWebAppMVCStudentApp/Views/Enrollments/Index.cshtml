@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ASPNETWebAppMVCStudentApp.Models.Enrollment>
+@using System.Linq
+
+@{
+    ViewBag.Title = "Enrollments";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Course</th>
+            <th>Grade</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @if (!Model.Any())
+    {
+        <tr>
+            <td colspan="4">No enrollments found.</td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Student?.FullName</td>
+                <td>@item.Course?.Title</td>
+                <td>@item.Grade</td>
+                <td class="text-right">
+                    @Html.ActionLink("Details", "Details", new { id = item.EnrollmentID }, new { @class = "btn btn-outline-secondary btn-sm" })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.EnrollmentID }, new { @class = "btn btn-outline-primary btn-sm mx-1" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.EnrollmentID }, new { @class = "btn btn-outline-danger btn-sm" })
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

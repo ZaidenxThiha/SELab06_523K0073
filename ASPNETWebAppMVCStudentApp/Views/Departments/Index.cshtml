@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ASPNETWebAppMVCStudentApp.Models.Department>
+@using System.Linq
+
+@{
+    ViewBag.Title = "Departments";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Budget</th>
+            <th>Start Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @if (!Model.Any())
+    {
+        <tr>
+            <td colspan="4">No departments found.</td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@String.Format("{0:C}", item.Budget)</td>
+                <td>@item.StartDate.ToShortDateString()</td>
+                <td class="text-right">
+                    @Html.ActionLink("Details", "Details", new { id = item.DepartmentID }, new { @class = "btn btn-outline-secondary btn-sm" })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.DepartmentID }, new { @class = "btn btn-outline-primary btn-sm mx-1" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.DepartmentID }, new { @class = "btn btn-outline-danger btn-sm" })
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
